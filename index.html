@@ -34,12 +34,14 @@
       min-height: 100vh;
     }
 
-    header {
-      background: var(--header);
-      padding: 8px 24px;
-      display: flex;
-      align-items: center;
-    }
+ header {
+  background: var(--header);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 
     .logo {
       font-family: 'Montserrat', sans-serif;
@@ -215,7 +217,7 @@
       margin: 0;
     }
 
-    /* Адаптивность */
+    
     @media (max-width: 600px) {
       .row {
         flex-direction: column;
