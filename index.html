@@ -6,23 +6,32 @@
   <title>ARTOKEN — проверка редкости ID аккаунтов Polywar</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#2c2c2c; 
-      --header:#191919; 
-      --card:#3a3a3a; 
-      --accent:#7c3aed; 
-      --muted:#b0b0b0;
-      --bad:#ef4444;
-      --good:#16a34a;
+    :root {
+      --bg: #2c2c2c;
+      --header: #191919;
+      --card: #3a3a3a;
+      --accent: #7c3aed;
+      --muted: #b0b0b0;
+      --bad: #ef4444;
+      --good: #16a34a;
     }
-    html, body {height:100%;margin:0;}
-    body{
-      font-family: Inter, system-ui, sans-serif; 
-      background:var(--bg); 
-      color:#f1f1f1; 
-      display:flex; 
-      flex-direction:column;
-      min-height:100vh;
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     header {
@@ -46,10 +55,9 @@
       flex-direction: column;
       align-items: center;
       position: relative;
-      padding-top: 24px; /* немного от хедера */
+      padding-top: 24px;
     }
 
-    /* текст над проверкой, разделён на два блока */
     .site-description {
       font-size: 20px;
       color: var(--muted);
@@ -60,7 +68,9 @@
       margin: 0 0 16px 0;
     }
 
-    .site-description p {margin:4px 0;} /* небольшой отступ между строками */
+    .site-description p {
+      margin: 4px 0;
+    }
 
     .checker-wrapper {
       display: flex;
@@ -70,65 +80,170 @@
       width: 100%;
     }
 
-    .card{
+    .card {
       background: var(--card);
-      border-radius: 12px; 
-      padding: 20px; 
-      width: 420px;
-      max-width: 90%;
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      max-width: 420px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    h2{margin:0 0 12px 0;font-size:20px;text-align:center;}
-    .row{display:flex; gap:12px; align-items:center; flex-wrap:wrap; width: 100%; justify-content: center;}
-    input[type="text"]{
-      flex:1;
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid #444;
-      background:#222;
-      color:inherit;
-      font-size:16px;
-      min-width: 0;
-    }
-    button{
-      background:var(--accent);
-      border:none;
-      color:#fff;
-      padding:10px 14px;
-      border-radius:8px;
-      cursor:pointer;
-      font-weight:600;
-      flex-shrink: 0;
+    h2 {
+      margin: 0 0 12px 0;
+      font-size: 20px;
+      text-align: center;
     }
 
-    .info{margin-top:16px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:100%;}
-    .tile{padding:12px;background:#2a2a2a;border-radius:10px;}
-    .small{font-size:12px;color:var(--muted);}
-    .big{font-weight:700;font-size:18px;margin-top:6px;}
-    .bar{height:12px;background:#444;border-radius:8px;overflow:hidden;margin-top:8px;}
-    .bar > i{display:block;height:100%;background:linear-gradient(90deg,#5eead4,#60a5fa);width:0%;}
-    .category{font-weight:700;padding:6px 10px;border-radius:999px;display:inline-block;margin-top:6px;font-size:13px;}
-    .patterns{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;}
-    .pattern{background:#2a2a2a;padding:6px 8px;border-radius:8px;font-size:13px;color:var(--muted);}
-    .error{color:var(--bad);font-weight:600;margin-top:8px;}
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #222;
+      color: inherit;
+      font-size: 16px;
+      min-width: 0;
+    }
+
+    button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #6d28d9;
+    }
+
+    .info {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .tile {
+      padding: 12px;
+      background: #2a2a2a;
+      border-radius: 10px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .big {
+      font-weight: 700;
+      font-size: 18px;
+      margin-top: 6px;
+    }
+
+    .bar {
+      height: 12px;
+      background: #444;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .bar > i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #5eead4, #60a5fa);
+      width: 0%;
+    }
+
+    .category {
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 13px;
+    }
+
+    .patterns {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pattern {
+      background: #2a2a2a;
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .error {
+      color: var(--bad);
+      font-weight: 600;
+      margin-top: 8px;
+    }
 
     footer {
       background: var(--header);
       padding: 8px 24px;
       text-align: center;
     }
-    footer p { font-size:13px; color:var(--muted); margin:0;}
 
-    @media (max-width: 480px) {
-      .row {flex-direction: column; gap: 8px;}
-      input[type="text"], button {width: 100%;}
-      h2 {font-size:18px;}
-      .big {font-size:16px;}
-      .site-description {max-width: 100%; font-size:18px;}
-      .logo {font-size:28px;}
+    footer p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 600px) {
+      .row {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+      }
+
+      input[type="text"],
+      button {
+        width: 100%;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .site-description {
+        max-width: 100%;
+        font-size: 16px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .big {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -186,75 +301,87 @@
     const btn = document.getElementById('checkBtn');
     const errorEl = document.getElementById('error');
     const results = document.getElementById('results');
-    const showInput=document.getElementById('showInput');
-    const showLengths=document.getElementById('showLengths');
-    const rarityPercentEl=document.getElementById('rarityPercent');
-    const rarityBar=document.getElementById('rarityBar');
-    const rarityCategoryEl=document.getElementById('rarityCategory');
-    const patternsEl=document.getElementById('patterns');
+    const showInput = document.getElementById('showInput');
+    const showLengths = document.getElementById('showLengths');
+    const rarityPercentEl = document.getElementById('rarityPercent');
+    const rarityBar = document.getElementById('rarityBar');
+    const rarityCategoryEl = document.getElementById('rarityCategory');
+    const patternsEl = document.getElementById('patterns');
 
-    function validateId(s){
-      if(!s) return {ok:false,msg:'Пустая строка'};
-      if(s.length<MIN_LEN||s.length>MAX_LEN) return {ok:false,msg:'Длина 1–6 символов'};
-      if(!/^[a-z0-9]+$/.test(s)) return {ok:false,msg:'Допустимы только a–z и 0–9'};
-      return {ok:true};
+    function validateId(s) {
+      if (!s) return { ok: false, msg: 'Пустая строка' };
+      if (s.length < MIN_LEN || s.length > MAX_LEN) return { ok: false, msg: 'Длина 1–6 символов' };
+      if (!/^[a-z0-9]+$/.test(s)) return { ok: false, msg: 'Допустимы только a–z и 0–9' };
+      return { ok: true };
     }
 
-    function detectPatterns(s){
-      const notes=[];
-      if(/^([a-z0-9])\1*$/.test(s)) notes.push('Все символы одинаковые');
-      if(s.length>1 && s===s.split('').reverse().join('')) notes.push('Палиндром');
-      if(/^[0-9]+$/.test(s)) notes.push('Только цифры');
-      if(/^[a-z]+$/.test(s)) notes.push('Только буквы');
+    function detectPatterns(s) {
+      const notes = [];
+      if (/^([a-z0-9])\1*$/.test(s)) notes.push('Все символы одинаковые');
+      if (s.length > 1 && s === s.split('').reverse().join('')) notes.push('Палиндром');
+      if (/^[0-9]+$/.test(s)) notes.push('Только цифры');
+      if (/^[a-z]+$/.test(s)) notes.push('Только буквы');
       return notes;
     }
 
-    function computeRarity(s){
+    function computeRarity(s) {
       const L = s.length;
       let maxRepeat = 1, current = 1;
-      for(let i=1;i<L;i++){
-        if(s[i]===s[i-1]) current++;
-        else current=1;
-        if(current>maxRepeat) maxRepeat=current;
+      for (let i = 1; i < L; i++) {
+        if (s[i] === s[i - 1]) current++;
+        else current = 1;
+        if (current > maxRepeat) maxRepeat = current;
       }
       const rarityPercent = (maxRepeat / L) * 100;
+      let cat = 'Common';
+      if (rarityPercent < 20) cat = 'Common';
+      else if (rarityPercent < 40) cat = 'Uncommon';
+      else if (rarityPercent < 60) cat = 'Rare';
+      else if (rarityPercent < 80) cat = 'Very Rare';
+      else cat = 'Legendary';
 
-      let cat='Common';
-      if(rarityPercent < 20) cat='Common';
-      else if(rarityPercent < 40) cat='Uncommon';
-      else if(rarityPercent < 60) cat='Rare';
-      else if(rarityPercent < 80) cat='Very Rare';
-      else cat='Legendary';
-
-      return {rarityPercent:+rarityPercent.toFixed(2), cat};
+      return { rarityPercent: +rarityPercent.toFixed(2), cat };
     }
 
-    function updateUI(s){
-      errorEl.style.display='none';
-      s=s.toLowerCase();
-      const v=validateId(s);
-      if(!v.ok){errorEl.textContent=v.msg;errorEl.style.display='block';results.style.display='none';return;}
+    function updateUI(s) {
+      errorEl.style.display = 'none';
+      s = s.toLowerCase();
+      const v = validateId(s);
+      if (!v.ok) {
+        errorEl.textContent = v.msg;
+        errorEl.style.display = 'block';
+        results.style.display = 'none';
+        return;
+      }
 
-      // показываем только заглавные буквы
       showInput.textContent = s.toUpperCase();
-      showLengths.textContent=`Длина: ${s.length}`;
+      showLengths.textContent = `Длина: ${s.length}`;
 
       const patterns = detectPatterns(s);
-      patternsEl.innerHTML = patterns.length>0 ? patterns.map(p=>`<div class="pattern">${p}</div>`).join('') 
-                                               : '<div class="pattern">Нет шаблонов</div>';
+      patternsEl.innerHTML = patterns.length > 0
+        ? patterns.map(p => `<div class="pattern">${p}</div>`).join('')
+        : '<div class="pattern">Нет шаблонов</div>';
 
       const rarity = computeRarity(s);
-      rarityPercentEl.textContent = rarity.rarityPercent+'%';
-      rarityBar.style.width = Math.max(2, rarity.rarityPercent)+'%';
-      const colors={'Common':'#94a3b8','Uncommon':'#60a5fa','Rare':'#7c3aed','Very Rare':'#f97316','Legendary':'#f43f5e'};
+      rarityPercentEl.textContent = rarity.rarityPercent + '%';
+      rarityBar.style.width = Math.max(2, rarity.rarityPercent) + '%';
+
+      const colors = {
+        'Common': '#94a3b8',
+        'Uncommon': '#60a5fa',
+        'Rare': '#7c3aed',
+        'Very Rare': '#f97316',
+        'Legendary': '#f43f5e'
+      };
+
       rarityCategoryEl.textContent = rarity.cat;
       rarityCategoryEl.style.background = colors[rarity.cat];
 
-      results.style.display='block';
+      results.style.display = 'block';
     }
 
-    btn.onclick=()=>{updateUI(input.value.trim());};
-    input.onkeydown=(e)=>{if(e.key==='Enter')btn.click();};
+    btn.onclick = () => { updateUI(input.value.trim()); };
+    input.onkeydown = (e) => { if (e.key === 'Enter') btn.click(); };
   </script>
 </body>
 </html>
