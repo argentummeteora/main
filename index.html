@@ -34,19 +34,18 @@
       min-height: 100vh;
     }
 
- header {
-  background: var(--header);
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
+    header {
+      background: var(--header);
+      padding: 4px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
 
     .logo {
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
-      font-size: 36px;
+      font-size: 28px;
       color: #fff;
       text-transform: uppercase;
     }
@@ -61,13 +60,14 @@
     }
 
     .site-description {
-      font-size: 20px;
+      font-size: 16px;
       color: var(--muted);
       width: 100%;
-      max-width: 420px;
-      text-align: left;
+      max-width: 400px;
+      text-align: justify;
       line-height: 1.6;
       margin: 0 0 16px 0;
+      padding: 0 8px;
     }
 
     .site-description p {
@@ -217,7 +217,6 @@
       margin: 0;
     }
 
-    
     @media (max-width: 600px) {
       .row {
         flex-direction: column;
@@ -236,11 +235,12 @@
 
       .site-description {
         max-width: 100%;
-        font-size: 16px;
+        font-size: 15px;
+        padding: 0 16px;
       }
 
       .logo {
-        font-size: 24px;
+        font-size: 20px;
       }
 
       .big {
@@ -341,7 +341,6 @@
       else if (rarityPercent < 60) cat = 'Rare';
       else if (rarityPercent < 80) cat = 'Very Rare';
       else cat = 'Legendary';
-
       return { rarityPercent: +rarityPercent.toFixed(2), cat };
     }
 
